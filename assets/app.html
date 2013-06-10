@@ -52,16 +52,16 @@
 			<li>
 				<div class="ui-grid-a ui-responsive" style="font-size:0.9em; font-weight:normal">
 					<div class="ui-block-a"><div class="ui-body">Przejechany dystans</div></div>
-					<div class="ui-block-b"><div class="ui-body">34580</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.przebieg.all %></div></div>
 					
 					<div class="ui-block-a"><div class="ui-body">Średni dystans między tankowaniami</div></div>
-					<div class="ui-block-b"><div class="ui-body">500</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.przebieg.between %></div></div>
 					
 					<div class="ui-block-a"><div class="ui-body">Najdłuższy dystans między tankowaniami</div></div>
-					<div class="ui-block-b"><div class="ui-body">850</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.przebieg.between_max %></div></div>
 					
 					<div class="ui-block-a"><div class="ui-body">Najkrótszy dystans między tankowaniami</div></div>
-					<div class="ui-block-b"><div class="ui-body">350</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.przebieg.between_min %></div></div>
 				</div>
 			</li>
 			
