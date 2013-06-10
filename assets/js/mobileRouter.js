@@ -18,10 +18,9 @@ define([
 "views/TankowanieEditView",
 "views/WykresView",
 "views/UstawieniaEditView",
-"views/PodsumowanieView",
 "models/UstawieniaModel"
 ],
-function( $, Backbone, Common, Session, Lang, AutoModel, AutoCollection, AutoView, AutoViewEdit, TankowanieModel, TankowanieCollection, TankowanieView, TankowanieViewEdit, WykresView, UstawieniaViewEdit, PodsumowanieView, UstawieniaModel ) {
+function( $, Backbone, Common, Session, Lang, AutoModel, AutoCollection, AutoView, AutoViewEdit, TankowanieModel, TankowanieCollection, TankowanieView, TankowanieViewEdit, WykresView, UstawieniaViewEdit, UstawieniaModel ) {
 
     var Router = Backbone.Router.extend( {
 
@@ -34,7 +33,6 @@ function( $, Backbone, Common, Session, Lang, AutoModel, AutoCollection, AutoVie
 			this.tankowanieEditView = new TankowanieViewEdit( { el: "#tankowanie-edit" } );
 			this.wykresView 		= new WykresView( { el: "#wykres", collection: new TankowanieCollection() } );
 			this.ustawieniaEditView = new UstawieniaViewEdit( { el: "#ustawienia-edit"} );
-			this.podsumowanieView 	= new PodsumowanieView( { el: "#podsumowanie", collection: new TankowanieCollection() } );
 			
 			// to na koncu construktora
 			Backbone.history.start();
@@ -42,7 +40,7 @@ function( $, Backbone, Common, Session, Lang, AutoModel, AutoCollection, AutoVie
 
         // Backbone.js Routes
         routes: {
-			"": 					"loading",
+			"": 			"loading",
 			"auto-lista": 			"autoList",
             "auto-edit" : 			"autoNew",
 			"auto-edit?:id" : 		"autoEdit",
@@ -52,45 +50,20 @@ function( $, Backbone, Common, Session, Lang, AutoModel, AutoCollection, AutoVie
 			"wykres?:typ,:typ2" :	"wykres",
 			"wykres?:typ" :			"wykres",
 			"wykres" :				"wykres",
-			"ustawienia-edit" :		"ustawieniaEdit",
-			"podsumowanie" :		"podsumowanie"
+			"ustawienia-edit" :		"ustawieniaEdit"
         },
 
-		podsumowanie : function() {
-			console.log('router:podsumowanie', Session);
-			
-			$.mobile.loading( "show" );
-			
-			var view = this.podsumowanieView;
-			var autoCol = new AutoCollection();
-		
-			Session.run(function() {			
-				view.auto = Session.autoModel;
-				//view.offset = 0;
-				view.collection.fetch({
-					sort : {"data" : "desc", "id" : "desc"},
-					where : {"id_auto = ?" : view.auto.get('id')},
-					success : function(data) {
-						view.render();
-						Lang.translate($('#podsumowanie'));
-						
-						$('#podsumowanie').page().trigger('pagecreate');
-						
-						$.mobile.changePage( "#podsumowanie" , { reverse: false, changeHash: false } );
-						$.mobile.loading( "hide" );
-					}
-				})
-			});
-		},
-		
 		loading: function() {
 			console.log('router:loading');
 			
 			$.mobile.loading( "show" );
-							
-			Session.run(function() {
-				$.mobile.changePage( "#tankowanie-lista" , { reverse: false, changeHash: true } );
-			})
+					
+			setTimeout(function() {
+				navigator.splashscreen.hide();
+				Session.run(function() {
+					$.mobile.changePage( "#tankowanie-lista" , { reverse: false, changeHash: true } );
+				})
+			}, 1000);
 			
 		},
 		
@@ -108,7 +81,7 @@ function( $, Backbone, Common, Session, Lang, AutoModel, AutoCollection, AutoVie
 						Session.setDefault(function () {
 							ustawieniaModel.set(Session);
 							t.ustawieniaEditRender(ustawieniaModel);
-						});
+			});
 					} else {
 						Session.setUstawienia(ustawieniaModel);
 						t.ustawieniaEditRender(ustawieniaModel);

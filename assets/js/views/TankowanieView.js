@@ -1,5 +1,10 @@
-﻿define([ "jquery", "backbone", "models/AutoModel", "models/TankowanieModel", "common", "session", "lang" ], function( $, Backbone, AutoModel, TankowanieModel, Common, Session, Lang ) {
+﻿// Category View
+// =============
 
+// Includes file dependencies
+define([ "jquery", "backbone", "models/AutoModel", "models/TankowanieModel", "common", "session", "lang" ], function( $, Backbone, AutoModel, TankowanieModel, Common, Session, Lang ) {
+
+    // Extends Backbone.View
     var TankowanieView = Backbone.View.extend( {
 		
 		offset : 0,
@@ -9,7 +14,7 @@
 			"click a.delete_popup"	: "deleteTankowaniePopup",
 			"click a.delete_final"	: "deleteTankowanie",
 			"click a.menu"			: "optionsTankowaniePopup",
-			//"click a.podsumowanie"	: "podsumowanieTankowaniePopup",
+			"click a.podsumowanie"	: "podsumowanieTankowaniePopup",
 			"click a.refresh"		: "refreshLista",
 			"click button.more"		: "renderMore"
         },
@@ -35,9 +40,14 @@
 			});			
 		},
 		
-		/*podsumowanieTankowaniePopup: function () {
+		podsumowanieTankowaniePopup: function () {
 			
-			
+			/**
+			* - całkowity przebieg
+			* - calkowite wlane paliwo
+			* - całkowite koszty na paliwo
+			* - śr. spalanie
+			*/
 			var dane = {
 				przebieg: 0,
 				paliwo: 0,
@@ -72,7 +82,7 @@
 			this.$el.find("#podsumowanieTankowaniePopup>div[data-role='content']").html(this.template);
 			this.$el.find("#optionsTankowaniePopup").popup("close");
 			this.$el.find("#podsumowanieTankowaniePopup").popup("open");
-		},*/
+		},
 		
 		menuTankowaniePopup: function(event) {
 			var idTankowanie = event.currentTarget.id;

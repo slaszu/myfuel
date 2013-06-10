@@ -1,7 +1,7 @@
 // Sets the require.js configuration for your application.
 require.config( {
 	  
-	  urlArgs: "bust=" +  (new Date()).getTime(),
+	  //urlArgs: "bust=" +  (new Date()).getTime(),
 	  
       // 3rd party script alias names (Easier to type "jquery" than "libs/jquery-1.8.2.min")
       paths: {
@@ -36,7 +36,7 @@ require.config( {
 				"deps": [ "underscore", "jquery" ],
 				"exports": "Backbone"  //attaches "Backbone" to the window object
             },
-			
+
 			"mobileRouter": {
 				"deps": [ "date_format", "date_format_lang" ]
 			},
@@ -73,43 +73,42 @@ require.config( {
 
 } );
 
-// Includes File Dependencies
-require([ "jquery", "backbone", "mobileRouter", "adapter" ], function( $, Backbone, Mobile ) {
-
-	$( document ).on( "mobileinit",
-		// Set up the "mobileinit" handler before requiring jQuery Mobile's module
-		function() {
-			// Prevents all anchor click handling including the addition of active button state and alternate link bluring.
-			$.mobile.linkBindingEnabled = false;
-
-			// Disabling this will prevent jQuery Mobile from handling hash changes
-			$.mobile.hashListeningEnabled = false;
-			
-			$.mobile.defaultPageTransition = "none";
-			$.mobile.buttonMarkup.hoverDelay = 0;
-		}
-	)
-	
-	$(document).delegate('input[type="number"]', 'keyup', function(e) {
-	
-		var element = e.currentTarget;
-		var value 	= element.value;
-		value 		= value.replace(/[^0-9]/g , '.');
-		value 		= value.replace(/[^0-9\.]/ , '');
-		element.value = value;
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+	// Includes File Dependencies
+	require([ "jquery", "backbone", "mobileRouter", "adapter" ], function( $, Backbone, Mobile ) {
+		console.log("deviceready");
 		
-		//e.preventDefault();
+		$( document ).on( "mobileinit",
+			// Set up the "mobileinit" handler before requiring jQuery Mobile's module
+			function() {
+				// Prevents all anchor click handling including the addition of active button state and alternate link bluring.
+				$.mobile.linkBindingEnabled = false;
+
+				// Disabling this will prevent jQuery Mobile from handling hash changes
+				$.mobile.hashListeningEnabled = false;
+				
+				$.mobile.defaultPageTransition = "none";
+				$.mobile.buttonMarkup.hoverDelay = 0;
+				$.event.special.swipe.scrollSupressionThreshold = 300;
+			}
+		)
+		
+		$(document).delegate('input[type="number"]', 'keyup', function(e) {
+		
+			var element = e.currentTarget;
+			var value 	= element.value;
+			value 		= value.replace(/[^0-9]/g , '.');
+			value 		= value.replace(/[^0-9\.]/ , '');
+			element.value = value;
+			
+			//e.preventDefault();
+		});
+		
+		// Wait for Cordova to load
+		require( [ "jquerymobile" ], function() {
+			// Instantiates a new Backbone.js Mobile Router
+			this.router = new Mobile();
+		});
 	});
-	
-	require( [ "jquerymobile" ], function() {
-		// Instantiates a new Backbone.js Mobile Router
-		this.router = new Mobile();
-	});
-	/*
-	var db = openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024);
-	db.transaction(function (tx) {
-	  tx.executeSql('CREATE TABLE IF NOT EXISTS foo (id unique, text)');
-	  tx.executeSql('INSERT INTO foo (id, text) VALUES (1, "synergies")');
-	});
-	*/
-} );
+}
