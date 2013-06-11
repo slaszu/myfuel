@@ -34,70 +34,71 @@
 	</div><!-- /header -->
 	<div data-role="content">
 		<ul data-role="listview" data-divider-theme="d">
-			<li data-role="list-divider">Spalanie</li>
+			<li data-role="list-divider"><span data-lang="spalanie">Spalanie</span> [ <%= session.pojemnosc %>/100 <%= session.dlugosc %> ]</li>
 			<li>
 				<div class="ui-grid-a ui-responsive" style="font-size:0.9em; font-weight:normal">
-					<div class="ui-block-a"><div class="ui-body">Średnie spalanie</div></div>
-					<div class="ui-block-b"><div class="ui-body"><%= dane.spalanie.avg %></div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="srednie">Średnie</div></div>
+					<div class="ui-block-b"><div class="ui-body"><b><%= dane.spalanie.avg %></b></div></div>
 					
-					<div class="ui-block-a"><div class="ui-body">Najniższe spalanie</div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="minimalne">Minimalne</div></div>
 					<div class="ui-block-b"><div class="ui-body"><%= dane.spalanie.min %></div></div>
 					
-					<div class="ui-block-a"><div class="ui-body">Najwyższe spalanie</div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="maksymalne">Maksymalne</div></div>
 					<div class="ui-block-b"><div class="ui-body"><%= dane.spalanie.max %></div></div>
 				</div>
 			</li>
 			
-			<li data-role="list-divider">Przebieg</li>
+			<li data-role="list-divider"><span data-lang="koszt">Koszt</span> [ <%= session.waluta %> ]</li>
 			<li>
 				<div class="ui-grid-a ui-responsive" style="font-size:0.9em; font-weight:normal">
-					<div class="ui-block-a"><div class="ui-body">Przejechany dystans</div></div>
-					<div class="ui-block-b"><div class="ui-body"><%= dane.przebieg.all %></div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="calkowity">Całkowity</div></div>
+					<div class="ui-block-b"><div class="ui-body"><b><%= dane.koszty.sum %></b></div></div>
 					
-					<div class="ui-block-a"><div class="ui-body">Średni dystans między tankowaniami</div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="sredni_koszt_tankowania">Średni koszt tankowania</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.koszty.avg %></div></div>
+					
+					<div class="ui-block-a"><div class="ui-body" data-lang="najdrozsze_tankowanie">Najdroższe tankowanie</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.koszty.max %></div></div>
+					
+					<div class="ui-block-a"><div class="ui-body" data-lang="najtansze_tankowanie">Najtańsze tankowanie</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.koszty.min %></div></div>
+				</div>
+			</li>
+			
+			<li data-role="list-divider"><span data-lang="przebieg">Przebieg</span> [ <%= session.dlugosc %> ]</li>
+			<li>
+				<div class="ui-grid-a ui-responsive" style="font-size:0.9em; font-weight:normal">
+					<div class="ui-block-a"><div class="ui-body" data-lang="calkowity">Całkowity</div></div>
+					<div class="ui-block-b"><div class="ui-body"><b><%= dane.przebieg.all %></b></div></div>
+					
+					<div class="ui-block-a"><div class="ui-body" data-lang="sredni_przebieg_miedzy_tankowaniami">Średni przebieg między tankowaniami</div></div>
 					<div class="ui-block-b"><div class="ui-body"><%= dane.przebieg.between %></div></div>
 					
-					<div class="ui-block-a"><div class="ui-body">Najdłuższy dystans między tankowaniami</div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="najwiekszy_przebieg_miedzy_tanowaniami">Najwięszy przebieg między tankowaniami</div></div>
 					<div class="ui-block-b"><div class="ui-body"><%= dane.przebieg.between_max %></div></div>
 					
-					<div class="ui-block-a"><div class="ui-body">Najkrótszy dystans między tankowaniami</div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="najmniejszy_przebieg_miedzy_tankowaniami">Najmniejszy przebieg między tankowaniami</div></div>
 					<div class="ui-block-b"><div class="ui-body"><%= dane.przebieg.between_min %></div></div>
 				</div>
 			</li>
 			
-			<li data-role="list-divider">Koszty tankowania</li>
+			<li data-role="list-divider"><span data-lang="paliwo">Paliwo</span> [ <%= session.pojemnosc %> ]</li>
 			<li>
 				<div class="ui-grid-a ui-responsive" style="font-size:0.9em; font-weight:normal">
-					<div class="ui-block-a"><div class="ui-body">Całkowity koszt</div></div>
-					<div class="ui-block-b"><div class="ui-body">5250</div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="cale_zuzyte_paliwo">Całe zużyte paliwo</div></div>
+					<div class="ui-block-b"><div class="ui-body"><b><%= dane.paliwo.sum %></b></div></div>
 					
-					<div class="ui-block-a"><div class="ui-body">Średni koszt tankowania</div></div>
-					<div class="ui-block-b"><div class="ui-body">150</div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="srednia_tankowana_ilosc">Średnia tankowana ilość</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.paliwo.avg %></div></div>
 					
-					<div class="ui-block-a"><div class="ui-body">Najdroższe tankowanie</div></div>
-					<div class="ui-block-b"><div class="ui-body">350</div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="najwieksza_tankowana_ilosc">Największa tankowana ilość</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.paliwo.max %></div></div>
 					
-					<div class="ui-block-a"><div class="ui-body">Najtańsze tankowanie</div></div>
-					<div class="ui-block-b"><div class="ui-body">150</div></div>
+					<div class="ui-block-a"><div class="ui-body" data-lang="najmniejsza_tankowana_ilosc">Najmniejsza tankowana ilość</div></div>
+					<div class="ui-block-b"><div class="ui-body"><%= dane.paliwo.min %></div></div>
 				</div>
 			</li>
 			
-			<li data-role="list-divider">Paliwo</li>
-			<li>
-				<div class="ui-grid-a ui-responsive" style="font-size:0.9em; font-weight:normal">
-					<div class="ui-block-a"><div class="ui-body">Całe zużyte paliwo</div></div>
-					<div class="ui-block-b"><div class="ui-body">1200</div></div>
-					
-					<div class="ui-block-a"><div class="ui-body">Średnia ilość tankowania</div></div>
-					<div class="ui-block-b"><div class="ui-body">22</div></div>
-					
-					<div class="ui-block-a"><div class="ui-body">Największe tankowanie</div></div>
-					<div class="ui-block-b"><div class="ui-body">35</div></div>
-					
-					<div class="ui-block-a"><div class="ui-body">Najmniejsze tankowanie</div></div>
-					<div class="ui-block-b"><div class="ui-body">15</div></div>
-				</div>
-			</li>
 		</ul>
 	</div>
 </script>

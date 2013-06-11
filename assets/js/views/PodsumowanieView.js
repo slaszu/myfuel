@@ -2,52 +2,13 @@
 
     var PodsumowanieView = Backbone.View.extend( {
 		
-		
-		/*podsumowanieTankowaniePopup: function () {
-			
-			
-			var dane = {
-				przebieg: 0,
-				paliwo: 0,
-				koszty: 0,
-				spalanie: 0
-			};
-			var coll = this.collection.toJSON();
-			dane.przebieg 	= _.max(coll, function(one){ return one.przebieg; }).przebieg - _.min(coll, function(one){ return one.przebieg; }).przebieg;
-			dane.paliwo		= _.reduce(coll, function(memo, one){ return memo + one.ilosc; }, 0);
-			dane.koszty		= _.reduce(coll, function(memo, one){ return memo + one.ilosc*one.cena; }, 0);
-			
-			var spalanieCount = 0;
-			spalanieSum = _.reduce(coll, function(memo, one){
-				if (parseFloat(one.spalanie) > 0) {
-					spalanieCount++;
-					return memo + one.spalanie;
-				} else {
-					return memo;
-				}
-			}, 0);
-			
-			if (spalanieCount > 0) {
-				dane.spalanie = spalanieSum/spalanieCount;
-			} else {
-				dane.spalanie = 0;
-			}
-			
-			this.template = _.template( $( "script#tankowaniePodsumowanie" ).html(), { "dane": dane, "Session": Session } );
-			
-			this.template = Lang.translate(this.template);
-			
-			this.$el.find("#podsumowanieTankowaniePopup>div[data-role='content']").html(this.template);
-			this.$el.find("#optionsTankowaniePopup").popup("close");
-			this.$el.find("#podsumowanieTankowaniePopup").popup("open");
-		},*/
-						
-        render: function() {
+		render: function() {
 			
 			var dane = {};
 			dane.spalanie 	= {'max': 0, 'min': 0, 'avg': 0};
 			dane.przebieg 	= {'max': 0, 'min': 0, 'all': 0, 'between': 0, 'between_max':0 , 'between_min':0};
-			dane.paliwo 	= {'sum': 0};
+			dane.paliwo 	= {'sum': 0, 'avg': 0, 'max': 0, 'min': 0};
+			dane.koszty		= {'sum': 0, 'avg': 0, 'max': 0, 'min': 0};
 			
 			var coll = this.collection.toJSON();
 			
@@ -72,13 +33,26 @@
 				dane.spalanie.avg	= ((dane.paliwo.sum - coll[0].ilosc) * 100)/ (dane.przebieg.all);
 				dane.spalanie.avg 	= dane.spalanie.avg.toFixed(2);
 				
+				dane.paliwo.avg		= (dane.paliwo.sum / coll.length).toFixed(2);
+				dane.paliwo.min 	= _.min(coll, function(one){ return one.ilosc; }).ilosc;
+				dane.paliwo.max 	= _.max(coll, function(one){ return one.ilosc; }).ilosc;
+				
+				var kosztySumCounter = 0;
+				dane.koszty.sum		= _.reduce(coll, function (memo, one) { if (one.cena != "") {memo = memo + one.cena * one.ilosc; kosztySumCounter++} return memo;}, 0);
+				if (kosztySumCounter > 0) {
+					dane.koszty.avg		= (dane.koszty.sum / kosztySumCounter).toFixed(2);
+				}
+				dane.koszty.min 	= _.min(coll, function(one){ if (one.cena != "") return one.cena * one.ilosc; });
+				dane.koszty.min		= (dane.koszty.min.cena * dane.koszty.min.ilosc).toFixed(2);
+				dane.koszty.max 	= _.max(coll, function(one){ if (one.cena != "") return one.cena * one.ilosc; });
+				dane.koszty.max		= (dane.koszty.max.cena * dane.koszty.max.ilosc).toFixed(2);
 			}
 			
 			console.log(dane);
 			
 			
 			
-			this.template = _.template( $( "script#podsumowanieContent" ).html(), {'dane' : dane} );
+			this.template = _.template( $( "script#podsumowanieContent" ).html(), {'dane' : dane, 'session' : Session} );
 			this.$el.html(this.template);
 			this.$el.find("div[data-role='header']>h1").html(this.auto.get("nazwa"));
 			

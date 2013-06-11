@@ -72,7 +72,21 @@
 			silnik : "Engine",
 			nowy_pojazd : "New vehicle",
 			wiecej : "more",
-			podsumowanie : "..."
+			paliwo : "Fuel",
+			srednie: 'Average',
+			minimalne: 'Minimum',
+			maksymalne: 'Maximum',
+			calkowity: 'Total',
+			sredni_koszt_tankowania: 'Average cost of refueling',
+			najdrozsze_tankowanie: 'The most expensive refueling',
+			najtansze_tankowanie: 'The cheapest refueling',
+			sredni_przebieg_miedzy_tankowaniami: 'Average mileage between refueling',
+			najwiekszy_przebieg_miedzy_tanowaniami: 'Najwięszy mileage between refueling',
+			najmniejszy_przebieg_miedzy_tankowaniami: 'Smallest mileage between refueling',
+			cale_zuzyte_paliwo: 'All fuel consumed',
+			srednia_tankowana_ilosc: 'Average refueled amount',
+			najwieksza_tankowana_ilosc: 'The largest refueled amount',
+			najmniejsza_tankowana_ilosc: 'The smallest refueled amount'
 		},
 		
 		de : {
@@ -130,7 +144,22 @@
 			marka_model: "Marke und Modell",
 			silnik: "Engine",
 			nowy_pojazd : "Neues Fahrzeug",
-			wiecej : "mehr"
+			wiecej : "mehr",
+			paliwo : "Kraftstoff",
+			srednie: "Durchschnitt",
+			minimalne: 'Minimum',
+			maksymalne: 'Maximum',
+			calkowity: 'Total',
+			sredni_koszt_tankowania: "Durchschnittliche Kosten für Betankung",
+			najdrozsze_tankowanie: "Die teuersten Tanken",
+			najtansze_tankowanie: 'Die billigste Tankstellen',
+			sredni_przebieg_miedzy_tankowaniami: "Durchschnittliche Laufleistung zwischen Tanken",
+			najwiekszy_przebieg_miedzy_tanowaniami: 'Najwięszy Autos zwischen Tanken',
+			najmniejszy_przebieg_miedzy_tankowaniami: "Kleinste Autos zwischen Tanken",
+			cale_zuzyte_paliwo: 'All Kraftstoff verbraucht',
+			srednia_tankowana_ilosc: "Durchschnittlich aufgetankt Betrag",
+			najwieksza_tankowana_ilosc: 'Die größte Menge getankt',
+			najmniejsza_tankowana_ilosc: "Der kleinste Betrag betankt"
 		},
 		
 		/**
