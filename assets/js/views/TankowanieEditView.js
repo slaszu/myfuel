@@ -142,7 +142,7 @@ define([ "jquery", "backbone","models/AutoModel", "models/TankowanieModel", "col
 							t.$el.find('input[name="'+key+'"]').next('span').html( Lang.getText('pole_wymagane') ).addClass('error');
 							result = false;
 						}
-						else if (!(/[0-9\.]/g).test(val)) {
+						else if (!(/^([0-9])+(\.){0,1}([0-9])*$/).test(val)) {
 							t.$el.find('input[name="'+key+'"]').next('span').html( Lang.getText('to_nie_jest_liczba') ).addClass('error');
 							result = false;
 						}
@@ -150,7 +150,7 @@ define([ "jquery", "backbone","models/AutoModel", "models/TankowanieModel", "col
 					case "cena" :
 						if (val == "") {
 						}
-						else if (!(/[0-9\.]/g).test(val)) {
+						else if (!(/^([0-9])+(\.){0,1}([0-9])*$/).test(val)) {
 							t.$el.find('input[name="'+key+'"]').next('span').html( Lang.getText('to_nie_jest_liczba') ).addClass('error');
 							result = false;
 						}
