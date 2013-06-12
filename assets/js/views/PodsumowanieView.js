@@ -29,10 +29,10 @@
 				dane.przebieg.between 		= Math.round((dane.przebieg.all / coll.length));
 				var between = [];
 				_.reduce(coll.reverse(), function (memo, one) { if (memo > 0) { var x = one.przebieg - memo; between.push(x);}  memo = one.przebieg; return memo;}, 0);
-				console.log(between);
-				dane.przebieg.between_max 	= _.max(between);
-				dane.przebieg.between_min 	= _.min(between);
-				
+				if (between.length > 0) {
+					dane.przebieg.between_max 	= _.max(between);
+					dane.przebieg.between_min 	= _.min(between);
+				}
 				dane.paliwo.sum		= _.reduce(coll, function (memo, one) { return memo + one.ilosc}, 0).toFixed(2);
 				
 				if (coll.length > 1) {
