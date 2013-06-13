@@ -10,7 +10,7 @@
 		//tx.executeSql('DROP TABLE IF EXISTS "auto"');
 		//tx.executeSql('DROP TABLE IF EXISTS "tankowanie"');
 		//tx.executeSql('DROP TABLE IF EXISTS "ustawienia"');
-	
+		
 		tx.executeSql('CREATE TABLE IF NOT EXISTS "auto" ("id" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "nazwa" VARCHAR, "opis" VARCHAR, "aktywny" BOOL DEFAULT 0)');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS  "tankowanie" ("id" INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,"data" DATETIME DEFAULT (CURRENT_TIMESTAMP) ,"przebieg" INTEGER,"ilosc" DECIMAL(6,2),"cena" DECIMAL(5,2), "spalanie" DECIMAL(6,2), "r" BOOL DEFAULT 0, "f" BOOL DEFAULT 0,"id_auto" INTEGER)');
 		tx.executeSql('CREATE INDEX IF NOT EXISTS tank_r ON tankowanie(r ASC)');

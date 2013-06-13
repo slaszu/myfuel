@@ -88,9 +88,12 @@ function( $, Backbone, Common, Session, Lang, AutoModel, AutoCollection, AutoVie
 			
 			$.mobile.loading( "show" );
 							
-			Session.run(function() {
-				$.mobile.changePage( "#tankowanie-lista" , { reverse: false, changeHash: true } );
-			})
+			setTimeout(function() {
+				navigator.splashscreen.hide();
+				Session.run(function() {
+					$.mobile.changePage( "#tankowanie-lista" , { reverse: false, changeHash: true } );
+				})
+			}, 1000);
 			
 		},
 		

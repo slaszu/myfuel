@@ -22,9 +22,31 @@
 		},
 		
 		setDefault : function(callback) {
-			this.lang 		= "en";
-			
-			callback();
+			var t = this;
+			//this.waluta 	= "EUR";
+			navigator.globalization.getLocaleName(
+				function (locale) {
+					var lang = locale.value;
+					lang = lang.slice(0,2);
+					switch(lang) {
+						case 'en' :
+						case 'de' :
+						case 'pl' :
+							t.lang = lang;
+							break;
+						default:
+							t.lang = 'en';
+						
+					}
+					console.log('success, '+ t.lang+','+ locale.value);
+					callback();
+				},
+				function () {
+					t.lang 		= "en";
+					console.log('error '+ t.lang);
+					callback();
+				}
+			);
 		},
 		
 		hasAuto : function() {
